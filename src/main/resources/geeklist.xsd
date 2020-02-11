@@ -1,0 +1,36 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="geeklist">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="postdate"/>
+                <xs:element type="xs:int" name="postdate_timestamp"/>
+                <xs:element type="xs:string" name="editdate"/>
+                <xs:element type="xs:int" name="editdate_timestamp"/>
+                <xs:element type="xs:byte" name="thumbs"/>
+                <xs:element type="xs:short" name="numitems"/>
+                <xs:element type="xs:string" name="username"/>
+                <xs:element type="xs:string" name="title"/>
+                <xs:element type="xs:string" name="description"/>
+                <xs:element name="item" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="body"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:int" name="id" use="optional"/>
+                        <xs:attribute type="xs:string" name="objecttype" use="optional"/>
+                        <xs:attribute type="xs:string" name="subtype" use="optional"/>
+                        <xs:attribute type="xs:int" name="objectid" use="optional"/>
+                        <xs:attribute type="xs:string" name="objectname" use="optional"/>
+                        <xs:attribute type="xs:string" name="username" use="optional"/>
+                        <xs:attribute type="xs:string" name="postdate" use="optional"/>
+                        <xs:attribute type="xs:string" name="editdate" use="optional"/>
+                        <xs:attribute type="xs:byte" name="thumbs" use="optional"/>
+                        <xs:attribute type="xs:int" name="imageid" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:int" name="id"/>
+            <xs:attribute type="xs:string" name="termsofuse"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
