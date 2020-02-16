@@ -10,7 +10,8 @@ public class GeeklistApiWrapper {
 
     public Geeklist getGeeklist( Integer geeklistId){
         try {
-            return restTemplate.getForObject( "https://api.geekdo.com/xmlapi/geeklist/" + geeklistId, Geeklist.class );
+
+            return restTemplate.getForObject( "https://api.geekdo.com/xmlapi/geeklist/" + geeklistId +"?comments=1", Geeklist.class );
         }catch(Exception e){
             return null;
         }

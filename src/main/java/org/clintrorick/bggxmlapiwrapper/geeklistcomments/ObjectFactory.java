@@ -1,7 +1,7 @@
 
-package org.clintrorick.bggxmlapiwrapper.stuff;
+package org.clintrorick.bggxmlapiwrapper.geeklistcomments;
 
-import org.clintrorick.bggxmlapiwrapper.Geeklist;
+import org.clintrorick.bggxmlapiwrapper.stuff.Geeklist;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each
  * Java content interface and Java element interface
- * generated in the org.clintrorick.bggxmlapiwrapper package.
+ * generated in the org.clintrorick.bggxmlapiwrapper.geeklistcomments package.
  * <p>An ObjectFactory allows you to programatically
  * construct new instances of the Java representation
  * for XML content. The Java representation of XML
@@ -25,7 +25,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.clintrorick.bggxmlapiwrapper
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.clintrorick.bggxmlapiwrapper.geeklistcomments
      *
      */
     public ObjectFactory() {
@@ -45,6 +45,22 @@ public class ObjectFactory {
      */
     public Geeklist.Item createGeeklistItem() {
         return new Geeklist.Item();
+    }
+
+    /**
+     * Create an instance of {@link Geeklist.Comment }
+     *
+     */
+    public Geeklist.Comment createGeeklistComment() {
+        return new Geeklist.Comment();
+    }
+
+    /**
+     * Create an instance of {@link Geeklist.Item.Comment }
+     *
+     */
+    public Geeklist.Item.Comment createGeeklistItemComment() {
+        return new Geeklist.Item.Comment();
     }
 
 }

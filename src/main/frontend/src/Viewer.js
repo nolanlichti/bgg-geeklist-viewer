@@ -37,7 +37,7 @@ class Viewer extends React.Component {
 
 
     componentDidMount() {
-        axios.get("/geeklists/267600/json")
+        axios.get("http://localhost:5000/geeklists/267600/json")
             .then((response)=>{
                 if (response && response.data === ''){
                     this.setState({bggIsLoading:true});
@@ -88,7 +88,10 @@ class Viewer extends React.Component {
         let currFilter = function(item){
             return item.objectname.toLowerCase().includes(val)
                 || item.body.toLowerCase().includes(val)
-            || item.username.toLowerCase().includes(val)
+                || item.username.toLowerCase().includes(val)
+                || item.comment.some((cmt)=>{cmt.value.toLowerCase().includes(val)})
+                || item.comment.some((cmt)=>{cmt.username.toLowerCase().includes(val)})
+
         };
         this.setState({currFilter:currFilter})
     }
@@ -96,6 +99,7 @@ class Viewer extends React.Component {
     render () {
         const buttonStyle = {padding:10+"px", margin:10+"px", width:90+"%"};
         const searchStyle = {width:90+"%"};
+        const commentsStyle = { marginLeft: 5+"%"};
 
         if (this.state.bggIsLoading){
             return <div className="container">BGG is loading the geeklist, please wait a few seconds and refresh the page.</div>
@@ -103,7 +107,7 @@ class Viewer extends React.Component {
             if (this.state.activeitems) {
                 return (
 
-                        <div className="container-fluid">
+                        <div className="container">
                             <div className="row">
                                 <div className="col-sm">
 
@@ -131,7 +135,7 @@ class Viewer extends React.Component {
                             <div className="row">&nbsp;  </div>
                             <div className="row">
                                 <div className="col-sm">
-                                    <input style={searchStyle} type="text" placeholder={"search title, post text, or username..."}
+                                    <input style={searchStyle} type="text" placeholder={"search title, post text, comment text, or username..."}
                                        onKeyUp={this.handleSearch} />
                                 </div>
                             </div>
@@ -154,10 +158,27 @@ class Viewer extends React.Component {
                                     <hr/>
                                     <div><h2><a
                                                 href={"https://boardgamegeek.com/geeklist/267600/item/"+a.id+"#item"+a.id}>{a.objectname}</a></h2></div>
-                                    <div>User:  <a
-                                                   href={"https://boardgamegeek.com/user/"+a.username}>{a.username}</a></div>
+                                    <div>User:  <b><a
+                                        href={"https://boardgamegeek.com/user/"+a.username}>{a.username}</a></b></div>
                                     <br/>
                                     <div>{parser.toReact(a.body)}</div>
+                                        <div> {
+                            a.comment.map(
+                                cmt => { return (<div style={commentsStyle}>
+                                                    <hr/>
+                                                    <span>
+                                                        <a href={"https://boardgamegeek.com/user/"+cmt.username}>{cmt.username} </a>
+                                                    </span>
+                                                    <span>
+                                                        <i>{this.timeUnitsAgo(cmt.postdate)}:&nbsp;</i>
+                                                    </span>
+                                                    <span>
+                                                        {cmt.value}
+                                                    </span>
+                                                 <hr/>
+                                                </div>)}
+                                )
+                                        }</div>
                                     <br/>
                                     <div>Edited: {this.timeUnitsAgo(a.editDt)}</div>
                                     <div>Posted: {this.timeUnitsAgo(a.postDt)}</div>

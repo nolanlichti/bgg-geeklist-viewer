@@ -1,15 +1,9 @@
 
-package org.clintrorick.bggxmlapiwrapper.stuff;
+package org.clintrorick.bggxmlapiwrapper;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -31,38 +25,12 @@ import javax.xml.bind.annotation.XmlValue;
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="comment" maxOccurs="unbounded" minOccurs="0">
- *           &lt;complexType>
- *             &lt;simpleContent>
- *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                 &lt;attribute name="username" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                 &lt;attribute name="date" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                 &lt;attribute name="postdate" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                 &lt;attribute name="editdate" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                 &lt;attribute name="thumbs" type="{http://www.w3.org/2001/XMLSchema}byte" />
- *               &lt;/extension>
- *             &lt;/simpleContent>
- *           &lt;/complexType>
- *         &lt;/element>
  *         &lt;element name="item" maxOccurs="unbounded" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
  *                   &lt;element name="body" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *                   &lt;element name="comment" maxOccurs="unbounded" minOccurs="0">
- *                     &lt;complexType>
- *                       &lt;simpleContent>
- *                         &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
- *                           &lt;attribute name="username" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                           &lt;attribute name="date" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                           &lt;attribute name="postdate" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                           &lt;attribute name="editdate" type="{http://www.w3.org/2001/XMLSchema}string" />
- *                           &lt;attribute name="thumbs" type="{http://www.w3.org/2001/XMLSchema}byte" />
- *                         &lt;/extension>
- *                       &lt;/simpleContent>
- *                     &lt;/complexType>
- *                   &lt;/element>
  *                 &lt;/sequence>
  *                 &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *                 &lt;attribute name="objecttype" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -99,7 +67,6 @@ import javax.xml.bind.annotation.XmlValue;
     "username",
     "title",
     "description",
-    "comment",
     "item"
 })
 @XmlRootElement(name = "geeklist")
@@ -113,7 +80,7 @@ public class Geeklist {
     protected String editdate;
     @XmlElement(name = "editdate_timestamp")
     protected int editdateTimestamp;
-    protected byte thumbs;
+    protected int thumbs;
     protected short numitems;
     @XmlElement(required = true)
     protected String username;
@@ -121,7 +88,6 @@ public class Geeklist {
     protected String title;
     @XmlElement(required = true)
     protected String description;
-    protected List<Geeklist.Comment> comment;
     protected List<Geeklist.Item> item;
     @XmlAttribute(name = "id")
     protected Integer id;
@@ -212,7 +178,7 @@ public class Geeklist {
      * Gets the value of the thumbs property.
      *
      */
-    public byte getThumbs() {
+    public int getThumbs() {
         return thumbs;
     }
 
@@ -220,7 +186,7 @@ public class Geeklist {
      * Sets the value of the thumbs property.
      *
      */
-    public void setThumbs(byte value) {
+    public void setThumbs(int value) {
         this.thumbs = value;
     }
 
@@ -313,35 +279,6 @@ public class Geeklist {
     }
 
     /**
-     * Gets the value of the comment property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comment property.
-     *
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getComment().add(newItem);
-     * </pre>
-     *
-     *
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Geeklist.Comment }
-     *
-     *
-     */
-    public List<Geeklist.Comment> getComment() {
-        if (comment == null) {
-            comment = new ArrayList<Geeklist.Comment>();
-        }
-        return this.comment;
-    }
-
-    /**
      * Gets the value of the item property.
      *
      * <p>
@@ -426,210 +363,10 @@ public class Geeklist {
      *
      * <pre>
      * &lt;complexType>
-     *   &lt;simpleContent>
-     *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *       &lt;attribute name="username" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="date" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="postdate" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="editdate" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *       &lt;attribute name="thumbs" type="{http://www.w3.org/2001/XMLSchema}byte" />
-     *     &lt;/extension>
-     *   &lt;/simpleContent>
-     * &lt;/complexType>
-     * </pre>
-     *
-     *
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "value"
-    })
-    public static class Comment {
-
-        @XmlValue
-        protected String value;
-        @XmlAttribute(name = "username")
-        protected String username;
-        @XmlAttribute(name = "date")
-        protected String date;
-        @XmlAttribute(name = "postdate")
-        protected String postdate;
-        @XmlAttribute(name = "editdate")
-        protected String editdate;
-        @XmlAttribute(name = "thumbs")
-        protected Byte thumbs;
-
-        /**
-         * Gets the value of the value property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
-        public String getValue() {
-            return value;
-        }
-
-        /**
-         * Sets the value of the value property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        /**
-         * Gets the value of the username property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
-        public String getUsername() {
-            return username;
-        }
-
-        /**
-         * Sets the value of the username property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
-        public void setUsername(String value) {
-            this.username = value;
-        }
-
-        /**
-         * Gets the value of the date property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
-        public String getDate() {
-            return date;
-        }
-
-        /**
-         * Sets the value of the date property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
-        public void setDate(String value) {
-            this.date = value;
-        }
-
-        /**
-         * Gets the value of the postdate property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
-        public String getPostdate() {
-            return postdate;
-        }
-
-        /**
-         * Sets the value of the postdate property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
-        public void setPostdate(String value) {
-            this.postdate = value;
-        }
-
-        /**
-         * Gets the value of the editdate property.
-         *
-         * @return
-         *     possible object is
-         *     {@link String }
-         *
-         */
-        public String getEditdate() {
-            return editdate;
-        }
-
-        /**
-         * Sets the value of the editdate property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *
-         */
-        public void setEditdate(String value) {
-            this.editdate = value;
-        }
-
-        /**
-         * Gets the value of the thumbs property.
-         *
-         * @return
-         *     possible object is
-         *     {@link Byte }
-         *
-         */
-        public Byte getThumbs() {
-            return thumbs;
-        }
-
-        /**
-         * Sets the value of the thumbs property.
-         *
-         * @param value
-         *     allowed object is
-         *     {@link Byte }
-         *
-         */
-        public void setThumbs(Byte value) {
-            this.thumbs = value;
-        }
-
-    }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     *
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     *
-     * <pre>
-     * &lt;complexType>
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
      *         &lt;element name="body" type="{http://www.w3.org/2001/XMLSchema}string"/>
-     *         &lt;element name="comment" maxOccurs="unbounded" minOccurs="0">
-     *           &lt;complexType>
-     *             &lt;simpleContent>
-     *               &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-     *                 &lt;attribute name="username" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="date" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="postdate" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="editdate" type="{http://www.w3.org/2001/XMLSchema}string" />
-     *                 &lt;attribute name="thumbs" type="{http://www.w3.org/2001/XMLSchema}byte" />
-     *               &lt;/extension>
-     *             &lt;/simpleContent>
-     *           &lt;/complexType>
-     *         &lt;/element>
      *       &lt;/sequence>
      *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
      *       &lt;attribute name="objecttype" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -650,14 +387,12 @@ public class Geeklist {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "body",
-        "comment"
+        "body"
     })
     public static class Item {
 
         @XmlElement(required = true)
         protected String body;
-        protected List<Geeklist.Item.Comment> comment;
         @XmlAttribute(name = "id")
         protected Integer id;
         @XmlAttribute(name = "objecttype")
@@ -701,35 +436,6 @@ public class Geeklist {
          */
         public void setBody(String value) {
             this.body = value;
-        }
-
-        /**
-         * Gets the value of the comment property.
-         *
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the comment property.
-         *
-         * <p>
-         * For example, to add a new item, do as follows:
-         * <pre>
-         *    getComment().add(newItem);
-         * </pre>
-         *
-         *
-         * <p>
-         * Objects of the following type(s) are allowed in the list
-         * {@link Geeklist.Item.Comment }
-         *
-         *
-         */
-        public List<Geeklist.Item.Comment> getComment() {
-            if (comment == null) {
-                comment = new ArrayList<Geeklist.Item.Comment>();
-            }
-            return this.comment;
         }
 
         /**
@@ -970,193 +676,6 @@ public class Geeklist {
          */
         public void setImageid(Integer value) {
             this.imageid = value;
-        }
-
-
-        /**
-         * <p>Java class for anonymous complex type.
-         *
-         * <p>The following schema fragment specifies the expected content contained within this class.
-         *
-         * <pre>
-         * &lt;complexType>
-         *   &lt;simpleContent>
-         *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
-         *       &lt;attribute name="username" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="date" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="postdate" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="editdate" type="{http://www.w3.org/2001/XMLSchema}string" />
-         *       &lt;attribute name="thumbs" type="{http://www.w3.org/2001/XMLSchema}byte" />
-         *     &lt;/extension>
-         *   &lt;/simpleContent>
-         * &lt;/complexType>
-         * </pre>
-         *
-         *
-         */
-        @XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "value"
-        })
-        public static class Comment {
-
-            @XmlValue
-            protected String value;
-            @XmlAttribute(name = "username")
-            protected String username;
-            @XmlAttribute(name = "date")
-            protected String date;
-            @XmlAttribute(name = "postdate")
-            protected String postdate;
-            @XmlAttribute(name = "editdate")
-            protected String editdate;
-            @XmlAttribute(name = "thumbs")
-            protected Byte thumbs;
-
-            /**
-             * Gets the value of the value property.
-             *
-             * @return
-             *     possible object is
-             *     {@link String }
-             *
-             */
-            public String getValue() {
-                return value;
-            }
-
-            /**
-             * Sets the value of the value property.
-             *
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *
-             */
-            public void setValue(String value) {
-                this.value = value;
-            }
-
-            /**
-             * Gets the value of the username property.
-             *
-             * @return
-             *     possible object is
-             *     {@link String }
-             *
-             */
-            public String getUsername() {
-                return username;
-            }
-
-            /**
-             * Sets the value of the username property.
-             *
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *
-             */
-            public void setUsername(String value) {
-                this.username = value;
-            }
-
-            /**
-             * Gets the value of the date property.
-             *
-             * @return
-             *     possible object is
-             *     {@link String }
-             *
-             */
-            public String getDate() {
-                return date;
-            }
-
-            /**
-             * Sets the value of the date property.
-             *
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *
-             */
-            public void setDate(String value) {
-                this.date = value;
-            }
-
-            /**
-             * Gets the value of the postdate property.
-             *
-             * @return
-             *     possible object is
-             *     {@link String }
-             *
-             */
-            public String getPostdate() {
-                return postdate;
-            }
-
-            /**
-             * Sets the value of the postdate property.
-             *
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *
-             */
-            public void setPostdate(String value) {
-                this.postdate = value;
-            }
-
-            /**
-             * Gets the value of the editdate property.
-             *
-             * @return
-             *     possible object is
-             *     {@link String }
-             *
-             */
-            public String getEditdate() {
-                return editdate;
-            }
-
-            /**
-             * Sets the value of the editdate property.
-             *
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *
-             */
-            public void setEditdate(String value) {
-                this.editdate = value;
-            }
-
-            /**
-             * Gets the value of the thumbs property.
-             *
-             * @return
-             *     possible object is
-             *     {@link Byte }
-             *
-             */
-            public Byte getThumbs() {
-                return thumbs;
-            }
-
-            /**
-             * Sets the value of the thumbs property.
-             *
-             * @param value
-             *     allowed object is
-             *     {@link Byte }
-             *
-             */
-            public void setThumbs(Byte value) {
-                this.thumbs = value;
-            }
-
         }
 
     }
