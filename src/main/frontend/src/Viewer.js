@@ -26,7 +26,14 @@ class Viewer extends React.Component {
 
     constructor () {
         super();
-        this.state = {geeklistdata: null, sort: this.sortDescByEditDt,activeitems:[],currFilter:this.filterNothing};
+        this.state = {
+            geeklistdata: null,
+            sort: this.sortDescByEditDt,
+            activeitems: [],
+            currFilter: this.filterNothing,
+            page: 0,
+            perPage: 50
+        };
         this.render = this.render.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -143,15 +150,21 @@ class Viewer extends React.Component {
 
 
                             <div className="row">
-                                <div className="col-sm">
-                                <b>Displaying 50 Items</b>
+                                <div className="col-xs-3" style={{ width: "25%" }}>
+                                    <button style={buttonStyle} disabled={this.state.page === 0} onClick={() => this.setState({ page: this.state.page - 1 })}>&lt;-</button>
+                                </div>
+                                <div className="col-xs-6" style={{ width: "50%", alignSelf: "center", textAlign: "center" }}>
+                                    <b>Items {this.state.page * this.state.perPage + 1} - {(this.state.page + 1) * this.state.perPage}</b>
+                                </div>
+                                <div className="col-xs-3" style={{ width: "25%" }}>
+                                    <button style={buttonStyle} disabled={(this.state.page + 1) * this.state.perPage >= this.state.activeitems.length} onClick={() => this.setState({ page: this.state.page + 1 })}>-&gt;</button>
                                 </div>
                             </div>
 
                             {this.state.activeitems
                                 .sort(this.state.currSort)
                                 .filter(this.state.currFilter)
-                                .slice(0,50)
+                                .slice(this.state.page * this.state.perPage, (this.state.page + 1) * this.state.perPage)
                                 .map(a=>{
                                     return  (
                                     <div key={a.objectname+a.username+a.id}>
